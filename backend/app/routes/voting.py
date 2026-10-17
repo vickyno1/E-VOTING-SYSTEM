@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, g
 from app.middleware.auth import jwt_required
 from app.middleware.permissions import roles_required
+from app.middleware.rate_limit import rate_limit
 from app.services.voting_service import voting_service
 
 voting_bp = Blueprint("voting", __name__, url_prefix="/api/voter/elections")
@@ -8,6 +9,7 @@ voting_bp = Blueprint("voting", __name__, url_prefix="/api/voter/elections")
 @voting_bp.route("/<election_id>/vote", methods=["POST"])
 @jwt_required
 @roles_required("voter")
+@rate_limit(max_requests=20, window_seconds=60)
 def submit_vote(election_id):
     voter_id = g.current_user["voter_id"]
     data = request.get_json(silent=True) or {}

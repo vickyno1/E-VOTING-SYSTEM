@@ -2,12 +2,14 @@ from flask import Blueprint, request, jsonify, g, make_response
 from app.services.auth_service import auth_service
 from app.services.face_service import FaceQualityError
 from app.middleware.auth import jwt_required
+from app.middleware.rate_limit import rate_limit
 from app.repositories.user_repository import UserRepository
 from app.config import Config
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
 
 @auth_bp.route("/register", methods=["POST"])
+@rate_limit(max_requests=10, window_seconds=60)
 def register():
     data = request.get_json(silent=True) or {}
     try:
@@ -67,6 +69,7 @@ def enroll_face():
         return jsonify({"error": "Server Error", "message": f"Face enrollment failed: {str(e)}"}), 500
 
 @auth_bp.route("/login", methods=["POST"])
+@rate_limit(max_requests=15, window_seconds=60)
 def login():
     data = request.get_json(silent=True) or {}
     identifier = data.get("identifier") or data.get("voter_id") or data.get("email")
@@ -92,6 +95,7 @@ def login():
         return jsonify({"error": "Server Error", "message": "An unexpected error occurred during login."}), 500
 
 @auth_bp.route("/verify-face", methods=["POST"])
+@rate_limit(max_requests=15, window_seconds=60)
 def verify_face():
     data = request.get_json(silent=True) or {}
     challenge_token = data.get("challenge_token")
