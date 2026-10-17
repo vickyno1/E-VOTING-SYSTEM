@@ -563,9 +563,10 @@ All 23 test suites will run and verify:
 ## 33. Author Information
 - **Project Architect & Developer**: Campus E-Voting Engineering Team
 - **Institution**: University Engineering & Computer Science Department
-- **Contact / GitHub**: `https://github.com/YOUR_GITHUB_USERNAME`
+- **Contact / GitHub**: [vickyno1](https://github.com/vickyno1/E-VOTING-SYSTEM)
 
 ---
 
 ## 34. License
 This project is licensed under the MIT License with academic disclaimer. See [`LICENSE`](file:///c:/Users/vicky/Downloads/e-voting-system/LICENSE) for details.
+
