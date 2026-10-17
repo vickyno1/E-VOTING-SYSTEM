@@ -1,0 +1,55 @@
+# Python
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Node / Frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+
+# Biometric & Sensitive Test Artifacts
+*.raw
+*.dat
+uploads/
+captured_faces/
+face_cache/
+biometrics_temp/
+
+# Database dumps & local storage
+*.dump
+*.bson
+*.mongo
+*.sqlite3
+
+# IDEs & System
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
